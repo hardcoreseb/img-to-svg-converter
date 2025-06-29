@@ -1,0 +1,6 @@
+<input type="file" (change)="onFileSelected($event)" accept="image/*" />
+<canvas #canvas hidden></canvas>
+
+<div id="svgContainer" [innerHTML]="svgOutput"></div>
+
+<a *ngIf="svgOutput" [href]="svgDownloadUrl" download="converted.svg" class="download-btn">Download SVG</a>
