@@ -1,18 +1,28 @@
 <div class="btnSelectContainer">
-    <button class="colorTrace traceBtn" [class.active]="activeButton === 'colorBtn'" (click)="setActive('colorBtn'); displayUpload()">Color Trace</button>
-    <button class="bwTrace traceBtn" [class.active]="activeButton === 'colorBtn'" (click)="setActive('bwBtn'); displayUpload()">B/W Trace</button>
+    <button class="colorTrace traceBtn" [class.active]="activeButton === 'colorBtn'" (click)="setActive('colorBtn');">Color Trace</button>
+    <button class="bwTrace traceBtn" [class.active]="activeButton === 'bwBtn'" (click)="setActive('bwBtn');">B/W Trace</button>
 </div>
 
-<label for="imgUpload" class="imgUploadLabel" [hidden]="hideUpload">
-    <i class="uploadIcon"></i>
-    Upload Image
-</label>
+<canvas class="img-canvas" #canvas></canvas>
 
-<input id="imgUpload" type="file" (change)="onFileSelected($event)" accept="image/*" [hidden]="hideUpload"/>
+<div class="uploadWrapper">
+    <label *ngIf="showUpload" for="imgUpload" class="imgUploadLabel">
+        <i class="uploadIcon"></i>
+        Upload Image
+    </label>
+    
+    <input id="imgUpload" type="file" (change)="onFileSelected($event)" accept="image/*" hidden/>
+    
+    <button *ngIf="showConvert" class="convertBtn" (click)="checkTraceMode()" [disabled]="!imageData">Convert to SVG</button>
+</div>
 
-<button class="convertBtn" (click)="checkTraceMode()" [hidden]="hideConvert">Convert to SVG</button>
+<!-- <div class="uploadWrapper">
+    <input id="imgUpload" type="file" (change)="onFileSelected($event)" accept="image/*" [hidden]="hideUpload"/>
+    
+    <button class="convertBtn" (click)="checkTraceMode()" [hidden]="hideConvert">Convert to SVG</button>
+</div> -->
 
-<canvas #canvas></canvas>
+
 
 <div *ngIf="svgOutput" id="svgContainer" [innerHTML]="svgOutput"></div>
 

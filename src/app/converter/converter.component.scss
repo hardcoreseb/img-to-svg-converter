@@ -62,13 +62,31 @@
     }
 }
 
+.img-canvas {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.uploadWrapper {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
 .imgUploadLabel {
     color: var(--glow-color);
     background-color: var(--btn-opac-color);
     padding: 1rem;
     border: 1px solid var(--glow-color);
     border-radius: 8px;
-    box-shadow: 0 0 2px 2px var(--glow-color);
+    box-shadow: 4px 8px 10px -3px var(--glow-spread-color);
+    display: flex;
+    justify-content: center;
 }
 
 .labelWrapper {
@@ -86,31 +104,35 @@
     mask-size: contain;
     mask-position: center;
     mask-repeat: no-repeat;
-    transform: translateY(+5px);
 }
 
-#imgUpload {
-    // &::file-selector-button {
-        
-    //     padding: 1rem 2rem;
-    //     content: "Upload";
-    //     transition: all 0.3s;
+// #imgUpload {
+//     position: relative;
 
-    //     &:hover {
-    //         color: var(--btn-color);
-    //         background-color: var(--glow-color);
-    //         box-shadow: 0 0 1em .25em var(--glow-color),
-    //                0 0 4em 2em var(--glow-spread-color),
-    //                inset 0 0 .75em .25em var(--glow-color);
-    //     }
+//     &::file-selector-button {
+//         color: var(--glow-color);
+//         background-color: var(--btn-opac-color);
+//         padding: 1rem;
+//         padding-left: 3rem;
+//         border: 1px solid var(--glow-color);
+//         border-radius: 8px;
+//         box-shadow: 4px 8px 10px -3px var(--glow-spread-color);
+//         display: inline-flex;
+//         justify-content: center;
+//         cursor: pointer;
+//     }
 
-    //     &:active {
-    //         box-shadow: 0 0 0.6em .25em var(--glow-color),
-    //                0 0 2.5em 2em var(--glow-spread-color),
-    //                inset 0 0 .5em .25em var(--glow-color);
-    //     }
-    // }
-}
+//     &::before {
+//         position: absolute;
+//         pointer-events: none;
+//         top: 10px;
+//         left: 16px;
+//         height: 20px;
+//         width: 20px;
+//         content: "";
+//         background-image: url("../../../public/upload_icon.svg");
+//     }
+// }
 
 #svgContainer {
     width: 100%;

@@ -21,16 +21,17 @@ export class ConverterComponent {
   svgOutput: SafeHtml = '';
   svgDownloadUrl: string = '';
   activeButton: string = '';
-  hideUpload: boolean = true;
-  hideConvert: boolean = true;
+  showUpload: boolean = false;
+  showConvert: boolean = false;
 
   setActive(buttonName: string) {
     this.activeButton = buttonName;
+    this.displayUpload();
     console.log("setActive");
   }
 
   displayUpload() {
-    this.hideUpload = false;
+    this.showUpload = true;
   }
 
   onFileSelected(event: Event): void {
@@ -49,10 +50,10 @@ export class ConverterComponent {
       ctx.drawImage(img, 0, 0);
 
       this.imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      this.showConvert = true;
     };
 
     img.src = URL.createObjectURL(file);
-    this.hideConvert = false;
   }
 
   checkTraceMode() {
@@ -60,7 +61,8 @@ export class ConverterComponent {
     if (this.activeButton == 'colorBtn') {
       this.traceColor();
     }
-    if (this.activeButton == 'bwBtn') {
+    else if (this.activeButton == 'bwBtn') {
+      console.log("Tracing in black and white...")
       this.traceBW();
     }
     else {
@@ -70,10 +72,10 @@ export class ConverterComponent {
 
   traceColor() {
     const svg = ImageTracer.imagedataToSVG(this.imageData, {
-      pathomit: 8,
-      numberofcolors: 8,
-      colorquantcycles: 3,
-      blurradius: 0,
+      pathomit: 16, //Edge node paths shorter than this will be discarded for noise reduction.
+      numberofcolors: 8, //Number of colors to use on palette if pal object is not defined.
+      colorquantcycles: 3, //Color quantization will be repeated this many times.
+      blurradius: 0, //Set this to 1..5 for selective Gaussian blur preprocessing.
     });
 
     this.setSvg(svg);
@@ -82,8 +84,9 @@ export class ConverterComponent {
   traceBW() {
     const canvas = this.canvasRef.nativeElement;
     canvas.toBlob(blob => {
+      console.log(URL.createObjectURL(blob!));
       if (!blob) return;
-      potrace.trace(URL.createObjectURL(blob), { threshold: 128 }, (err, svg) => {
+      potrace.posterize(URL.createObjectURL(blob), { }, (err, svg) => {
         if (err) {
           console.error(err);
           return;
