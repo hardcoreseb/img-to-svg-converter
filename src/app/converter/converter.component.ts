@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as potrace from 'potrace';
+import { NgZone } from '@angular/core';
 
 
 declare const ImageTracer: any;
@@ -14,7 +15,7 @@ declare const ImageTracer: any;
 })
 export class ConverterComponent {
   
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private ngZone: NgZone) {}
   
   @ViewChild('canvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   imageData!: ImageData;
@@ -86,12 +87,15 @@ export class ConverterComponent {
     canvas.toBlob(blob => {
       console.log(URL.createObjectURL(blob!));
       if (!blob) return;
-      potrace.posterize(URL.createObjectURL(blob), { }, (err, svg) => {
+      potrace.trace(URL.createObjectURL(blob), { }, (err, svg) => {
         if (err) {
           console.error(err);
           return;
         }
-        this.setSvg(svg);
+        // Trigger UI to update
+        this.ngZone.run(() => {
+          this.setSvg(svg);
+        });
       });
     });
   }
