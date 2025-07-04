@@ -1,6 +1,19 @@
-<input type="file" (change)="onFileSelected($event)" accept="image/*" />
-<canvas #canvas hidden></canvas>
+<div class="btnSelectContainer">
+    <button class="colorTrace traceBtn" [class.active]="activeButton === 'colorBtn'" (click)="setActive('colorBtn'); displayUpload()">Color Trace</button>
+    <button class="bwTrace traceBtn" [class.active]="activeButton === 'colorBtn'" (click)="setActive('bwBtn'); displayUpload()">B/W Trace</button>
+</div>
 
-<div id="svgContainer" [innerHTML]="svgOutput"></div>
+<label for="imgUpload" class="imgUploadLabel" [hidden]="hideUpload">
+    <i class="uploadIcon"></i>
+    Upload Image
+</label>
+
+<input id="imgUpload" type="file" (change)="onFileSelected($event)" accept="image/*" [hidden]="hideUpload"/>
+
+<button class="convertBtn" (click)="checkTraceMode()" [hidden]="hideConvert">Convert to SVG</button>
+
+<canvas #canvas></canvas>
+
+<div *ngIf="svgOutput" id="svgContainer" [innerHTML]="svgOutput"></div>
 
 <a *ngIf="svgOutput" [href]="svgDownloadUrl" download="converted.svg" class="download-btn">Download SVG</a>
