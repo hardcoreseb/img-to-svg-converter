@@ -18,16 +18,33 @@ export class ConverterComponent {
   constructor(private sanitizer: DomSanitizer, private ngZone: NgZone) {}
   
   @ViewChild('canvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('posterizedCheckbox', { static: false }) posterizedCheckboxRef!: ElementRef<HTMLInputElement>;
+
   imageData!: ImageData;
   svgOutput: SafeHtml = '';
   svgDownloadUrl: string = '';
   activeButton: string = '';
   showUpload: boolean = false;
   showConvert: boolean = false;
+  checkBoxChecked: boolean = false;
+  checkBoxDisabled: boolean = true;
 
   setActive(buttonName: string) {
     this.activeButton = buttonName;
     this.displayUpload();
+
+    if (buttonName === 'bwBtn') {
+      this.checkBoxDisabled = false;
+    } 
+    else {
+      this.checkBoxDisabled = true;
+      this.checkBoxChecked = false;
+
+      //Force uncheck in the DOM
+      if (this.posterizedCheckboxRef?.nativeElement) {
+      this.posterizedCheckboxRef.nativeElement.checked = false;
+    }
+    }
     console.log("setActive");
   }
 
@@ -61,13 +78,21 @@ export class ConverterComponent {
     console.log(this.activeButton, "is the active button")
     if (this.activeButton == 'colorBtn') {
       this.traceColor();
+      return;
     }
     else if (this.activeButton == 'bwBtn') {
+      if(this.checkBoxChecked) {
+        console.log("Posterizing image...")
+        this.posterize();
+        return;
+      }
       console.log("Tracing in black and white...")
       this.traceBW();
+      return;
     }
     else {
       console.log("No mode found!");
+      return;
     }
   }
 
@@ -88,6 +113,24 @@ export class ConverterComponent {
       console.log(URL.createObjectURL(blob!));
       if (!blob) return;
       potrace.trace(URL.createObjectURL(blob), { }, (err, svg) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        // Trigger UI to update
+        this.ngZone.run(() => {
+          this.setSvg(svg);
+        });
+      });
+    });
+  }
+
+  posterize() {
+    const canvas = this.canvasRef.nativeElement;
+    canvas.toBlob(blob => {
+      console.log(URL.createObjectURL(blob!));
+      if (!blob) return;
+      potrace.posterize(URL.createObjectURL(blob), { }, (err, svg) => {
         if (err) {
           console.error(err);
           return;

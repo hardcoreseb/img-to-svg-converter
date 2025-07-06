@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     gap: 3rem;
+    position: relative;
 
     button {
         border: .25em solid var(--glow-color);
@@ -23,6 +24,7 @@
         text-shadow: 0 0 .5em var(--glow-color);
         position: relative;
         transition: all 0.3s;
+        cursor: pointer;
 
         &.active {
             color: var(--btn-color);
@@ -61,6 +63,122 @@
                inset 0 0 .5em .25em var(--glow-color);
     }
 }
+
+.checkboxContainer {
+    cursor: pointer;
+    position: absolute;
+    right: -175px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.checkboxContainer input {
+    display: none;
+}
+
+.checkboxContainer svg {
+    overflow: visible;
+}
+
+.path {
+    fill: none;
+    stroke: var(--glow-color);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    stroke-dasharray: 241 9999999;
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 1em .25em var(--glow-color),
+               0 0 4em 1em var(--glow-spread-color),
+               inset 0 0 .75em .25em var(--glow-color));
+    -webkit-filter: drop-shadow(0 1em .25em var(--glow-color),
+               0 0 4em 1em var(--glow-spread-color),
+               inset 0 0 .75em .25em var(--glow-color));
+    -webkit-svg-shadow: 0 1em .25em var(--glow-color),
+               0 0 4em 1em var(--glow-spread-color),
+               inset 0 0 .75em .25em var(--glow-color);
+}
+
+#checkboxCheckmark {
+    filter: drop-shadow(0 0 .75em var(--glow-color));
+}
+
+.checkboxContainer input:checked ~ svg .path {
+    stroke-dasharray: 70.5096664428711 9999999;
+    stroke-dashoffset: -262.2723388671875;
+}
+
+#posterizedCheckbox[disabled] {
+    & ~ #checkboxCheckmark,
+    & ~ .form-desc { 
+        cursor: not-allowed;
+    }
+
+    & ~ #checkboxCheckmark {
+        filter: invert(0.5) grayscale(1);
+    }
+    & ~ .form-desc {
+        color: rgba(255, 255, 255, 0.5);
+        text-shadow: none;
+    }
+}
+
+.checkboxContainer:has(#posterizedCheckbox:disabled) {
+    cursor: not-allowed;
+}
+
+.form-desc {
+    color: var(--glow-color);
+    text-shadow: 0 0 .5em var(--glow-color);
+}
+
+//Button replacement logic with radio inputs
+// .radio-inputs {
+//     margin-left: auto;
+//     margin-right: auto;
+//     position: relative;
+//     display: flex;
+//     gap: 2rem;
+//     flex: 1 1 auto;
+//     flex-wrap: wrap;
+//     border-radius: 0.5rem;
+//     background-color: #EEE;
+//     box-sizing: border-box;
+//     //box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+//     box-shadow: 0 0 10px 1px #e879f7;
+//     padding: 0.25rem;
+//     max-width: 500px;
+//     min-width: fit-content;
+//     font-size: 14px;
+// }
+
+// .radio-inputs .radio {
+//     flex: 1;
+//     text-align: center;
+// }
+
+// .radio-inputs .radio input {
+//     display: none;
+// }
+
+// .radio-inputs .radio .name {
+//     display: flex;
+//     cursor: pointer;
+//     align-items: center;
+//     justify-content: center;
+//     border-radius: 0.5rem;
+//     border: none;
+//     padding: .5rem 0;
+//     color: rgba(51, 65, 85, 1);
+//     transition: all .15s ease-in-out;
+// }
+
+// .radio-inputs .radio input:checked + .name {
+//     background-color: #fff;
+//     font-weight: 600;
+// }
 
 .img-canvas {
     display: block;
