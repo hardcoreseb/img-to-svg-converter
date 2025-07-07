@@ -1,15 +1,19 @@
 <div class="btnSelectContainer">
     <button 
+        #colorTraceButton
         class="colorTrace traceBtn" 
         [class.active]="activeButton === 'colorBtn'" 
         (click)="setActive('colorBtn');">
-            Color Trace
+            <span class="actual-text">&nbsp;Color&nbsp;Trace&nbsp;</span>
+            <span aria-hidden="true" class="hover-text">&nbsp;Color&nbsp;Trace&nbsp;</span>
     </button>
     <button 
+        #bwTraceButton
         class="bwTrace traceBtn" 
         [class.active]="activeButton === 'bwBtn'" 
         (click)="setActive('bwBtn');">
-            B/W Trace
+            <span class="actual-text">&nbsp;B/W&nbsp;Trace&nbsp;</span>
+            <span aria-hidden="true" class="hover-text">&nbsp;B/W&nbsp;Trace&nbsp;</span>
     </button>
     <label class="checkboxContainer">
         <input 
@@ -44,7 +48,7 @@
   </label>
 </div> -->
 
-<canvas class="img-canvas" #canvas></canvas>
+<canvas class="img-canvas" [ngClass]="{'showCanvas': imageData}" #canvas></canvas>
 
 <div class="uploadWrapper">
     <label *ngIf="showUpload" for="imgUpload" class="imgUploadLabel">
@@ -65,6 +69,6 @@
 
 
 
-<div *ngIf="svgOutput" id="svgContainer" [innerHTML]="svgOutput"></div>
+<div *ngIf="svgOutput" id="svgOutput" [innerHTML]="svgOutput"></div>
 
-<a *ngIf="svgOutput" [href]="svgDownloadUrl" download="converted.svg" class="download-btn">Download SVG</a>
+<a *ngIf="svgOutput" [href]="svgDownloadUrl" download="converted.svg" class="downloadBtn">Download SVG</a>

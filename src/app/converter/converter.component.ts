@@ -19,6 +19,8 @@ export class ConverterComponent {
   
   @ViewChild('canvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('posterizedCheckbox', { static: false }) posterizedCheckboxRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('colorTraceButton', { static: false }) colorTraceButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('bwTraceButton', { static: false }) bwTraceButton!: ElementRef<HTMLButtonElement>;
 
   imageData!: ImageData;
   svgOutput: SafeHtml = '';
@@ -30,6 +32,20 @@ export class ConverterComponent {
   checkBoxDisabled: boolean = true;
 
   setActive(buttonName: string) {
+    console.log(buttonName, "buttonName");
+    console.log(this.activeButton, "activeButton");
+    if (buttonName === this.activeButton) {
+      this.activeButton = '';
+      this.checkBoxDisabled = true;
+      this.checkBoxChecked = false;
+
+      //Force uncheck in the DOM
+      if (this.posterizedCheckboxRef?.nativeElement) {
+      this.posterizedCheckboxRef.nativeElement.checked = false;
+      }
+      return;
+    }
+
     this.activeButton = buttonName;
     this.displayUpload();
 
@@ -45,7 +61,7 @@ export class ConverterComponent {
       this.posterizedCheckboxRef.nativeElement.checked = false;
     }
     }
-    console.log("setActive");
+    console.log(this.activeButton, "-> setActive");
   }
 
   displayUpload() {
