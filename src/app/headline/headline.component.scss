@@ -3,4 +3,11 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--secondary-text-color);
+    margin-top: 1rem;
+}
+
+@media only screen and (max-width: 900px) {
+    .headline {
+        font-size: 1.5rem;
+    }
 }

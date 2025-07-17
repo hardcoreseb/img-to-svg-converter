@@ -72,7 +72,7 @@
 
         --border-right: 6px;
         --text-stroke-color: rgba(255,255,255,0.6);
-        --animation-color: #37FF8B;
+        --green-glow: #37FF8B;
         --fs-size: 2em;
         letter-spacing: 3px;
         text-decoration: none;
@@ -87,23 +87,23 @@
             position: absolute;
             box-sizing: border-box;
             content: attr(data-text);
-            color: var(--animation-color);
+            color: var(--green-glow);
             width: 0%;
             inset: 0;
-            border-right: var(--border-right) solid var(--animation-color);
+            border-right: var(--border-right) solid var(--green-glow);
             overflow: hidden;
             transition: 0.5s;
-            -webkit-text-stroke: 1px var(--animation-color);
+            -webkit-text-stroke: 1px var(--green-glow);
         }
 
         &:hover .hover-text {
             width: 100%;
-            filter: drop-shadow(0 0 23px var(--animation-color))
+            filter: drop-shadow(0 0 23px var(--green-glow))
         }
 
         &.active .hover-text {
             width: 100%;
-            filter: drop-shadow(0 0 23px var(--animation-color));
+            filter: drop-shadow(0 0 23px var(--green-glow));
         }
     }
     
@@ -128,26 +128,26 @@
 
 .path {
     fill: none;
-    stroke: var(--glow-color);
+    stroke: #37FF8B;
     stroke-width: 6;
     stroke-linecap: round;
     stroke-linejoin: round;
     transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
     stroke-dasharray: 241 9999999;
     stroke-dashoffset: 0;
-    filter: drop-shadow(0 1em .25em var(--glow-color),
-               0 0 4em 1em var(--glow-spread-color),
-               inset 0 0 .75em .25em var(--glow-color));
-    -webkit-filter: drop-shadow(0 1em .25em var(--glow-color),
-               0 0 4em 1em var(--glow-spread-color),
-               inset 0 0 .75em .25em var(--glow-color));
-    -webkit-svg-shadow: 0 1em .25em var(--glow-color),
-               0 0 4em 1em var(--glow-spread-color),
-               inset 0 0 .75em .25em var(--glow-color);
+    filter: drop-shadow(0 1em .25em var(--green-glow),
+               0 0 4em 1em var(--green-glow),
+               inset 0 0 .75em .25em var(--green-glow));
+    -webkit-filter: drop-shadow(0 1em .25em var(--green-glow),
+               0 0 4em 1em var(--green-glow),
+               inset 0 0 .75em .25em var(--green-glow));
+    -webkit-svg-shadow: 0 1em .25em var(--green-glow),
+               0 0 4em 1em var(--green-glow),
+               inset 0 0 .75em .25em var(--green-glow);
 }
 
 #checkboxCheckmark {
-    filter: drop-shadow(0 0 .75em var(--glow-color));
+    filter: drop-shadow(0 0 .75em var(--green-glow));
 }
 
 .checkboxContainer input:checked ~ svg .path {
@@ -175,8 +175,8 @@
 }
 
 .form-desc {
-    color: var(--glow-color);
-    text-shadow: 0 0 .5em var(--glow-color);
+    color: var(--green-glow);
+    text-shadow: 0 0 .5em var(--green-glow);
 }
 
 //Button replacement logic with radio inputs
@@ -252,12 +252,12 @@
 }
 
 .imgUploadLabel {
-    color: var(--glow-color);
-    background-color: var(--btn-opac-color);
+    color: var(--green-glow);
+    background-color: var(--dark-green);
     padding: 1rem;
-    border: 1px solid var(--glow-color);
+    border: 1px solid var(--green-glow);
     border-radius: 8px;
-    box-shadow: 4px 4px 10px -3px var(--glow-spread-color);
+    box-shadow: 4px 4px 10px -3px var(--green-glow);
     display: flex;
     justify-content: center;
 
@@ -270,11 +270,11 @@
     &:hover {
         left: 4px;
         top: 4px;
-        box-shadow: var(--glow-spread-color) 0px 0px 0px 0px;
+        box-shadow: var(--green-glow) 0px 0px 0px 0px;
     }
 
     &:active {
-        background-color: var(--btn-color);
+        background-color: var(--medium-green);
     }
 }
 
@@ -285,7 +285,7 @@
 
 .uploadIcon {
     mask-image: url("../../../public/upload_icon.svg");
-    background: var(--glow-color);
+    background: var(--green-glow);
     // Make sure you define dimensions for your div otherwise it won't show up
     display: inline-block;
     height: 1.5rem;
@@ -296,12 +296,12 @@
 }
 
 .convertBtn {
-    color: var(--glow-color);
-    background-color: var(--btn-opac-color);
+    color: var(--green-glow);
+    background-color: var(--dark-green);
     padding: 1rem;
-    border: 1px solid var(--glow-color);
+    border: 1px solid var(--green-glow);
     border-radius: 8px;
-    box-shadow: 4px 4px 10px -3px var(--glow-spread-color);
+    box-shadow: 4px 4px 10px -3px var(--green-glow);
     display: flex;
     justify-content: center;
 
@@ -314,12 +314,26 @@
     &:hover {
         left: 4px;
         top: 4px;
-        box-shadow: var(--glow-spread-color) 0px 0px 0px 0px;
+        box-shadow: var(--green-glow) 0px 0px 0px 0px;
     }
 
     &:active {
-        background-color: var(--btn-color);
+        background-color: var(--medium-green);
     }
+}
+
+.convertIcon {
+    mask-image: url("../../../public/convert_icon.svg");
+    background: var(--green-glow);
+    // Make sure you define dimensions for your div otherwise it won't show up
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+
+    margin-right: 3px;
 }
 
 // #imgUpload {
@@ -361,12 +375,12 @@
 }
 
 .downloadBtn {
-    color: var(--glow-color);
-    background-color: var(--btn-opac-color);
+    color: var(--green-glow);
+    background-color: var(--dark-green);
     padding: 1rem;
-    border: 1px solid var(--glow-color);
+    border: 1px solid var(--green-glow);
     border-radius: 8px;
-    box-shadow: 4px 4px 10px -3px var(--glow-spread-color);
+    box-shadow: 4px 4px 10px -3px var(--green-glow);
     display: flex;
     justify-content: center;
 
@@ -385,10 +399,46 @@
     &:hover {
         left: 4px;
         top: 4px;
-        box-shadow: var(--glow-spread-color) 0px 0px 0px 0px;
+        box-shadow: var(--green-glow) 0px 0px 0px 0px;
     }
 
     &:active {
-        background-color: var(--btn-color);
+        background-color: var(--medium-green);
+    }
+}
+
+.downloadIcon {
+    mask-image: url("../../../public/download_icon.svg");
+    background: var(--green-glow);
+    // Make sure you define dimensions for your div otherwise it won't show up
+    display: inline-block;
+    height: 1.5rem;
+    width: 1.5rem;
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 900px) {
+    .btnSelectContainer {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 5rem;
+
+        --fs-size-mobile: 1em;
+
+        .traceBtn {
+            font-size: var(--fs-size-mobile);
+        }
+    }
+
+    .checkboxContainer {
+        left: 0px;
+        bottom: -50px;
+    }
+
+    .uploadWrapper {
+        width: 100%;
+        gap: 1rem;
     }
 }

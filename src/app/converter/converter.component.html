@@ -58,7 +58,15 @@
     
     <input id="imgUpload" type="file" (change)="onFileSelected($event)" accept="image/*" hidden/>
     
-    <button *ngIf="showConvert" class="convertBtn" (click)="checkTraceMode()" [disabled]="!imageData">Convert to SVG</button>
+    <button 
+        *ngIf="showConvert" 
+        class="convertBtn" 
+        (click)="checkTraceMode()" 
+        [disabled]="!imageData"
+    >
+        <i class="convertIcon"></i>
+        Convert to SVG
+    </button>
 </div>
 
 <!-- <div class="uploadWrapper">
@@ -71,4 +79,12 @@
 
 <div *ngIf="svgOutput" id="svgOutput" [innerHTML]="svgOutput"></div>
 
-<a *ngIf="svgOutput" [href]="svgDownloadUrl" download="converted.svg" class="downloadBtn">Download SVG</a>
+<a 
+    *ngIf="svgOutput" 
+    [href]="svgDownloadUrl" 
+    download="converted.svg" 
+    class="downloadBtn"
+>
+    <i class="downloadIcon"></i>
+    Download SVG
+</a>
