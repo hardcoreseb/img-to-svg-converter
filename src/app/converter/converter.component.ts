@@ -160,6 +160,21 @@ export class ConverterComponent {
   }
 
   private setSvg(raw: string) {
+    // Try to extract the width and height values
+    const widthMatch = raw.match(/width="(\d+)"/);
+    const heightMatch = raw.match(/height="(\d+)"/);
+
+    if (widthMatch && heightMatch) {
+    const width = widthMatch[1];
+    const height = heightMatch[1];
+
+    // Add viewBox and override width/height for scaling
+    raw = raw
+      .replace(/<svg([^>]*)>/, `<svg$1 viewBox="0 0 ${width} ${height}" width="100%" height="auto">`)
+      .replace(/width="[^"]+"/, 'width="100%"')
+      .replace(/height="[^"]+"/, 'height="auto"');
+    }
+
     this.svgOutput = this.sanitizer.bypassSecurityTrustHtml(raw);
     this.svgDownloadUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(raw);
   }
