@@ -32,8 +32,6 @@ export class ConverterComponent {
   checkBoxDisabled: boolean = true;
 
   setActive(buttonName: string) {
-    console.log(buttonName, "buttonName");
-    console.log(this.activeButton, "activeButton");
     if (buttonName === this.activeButton) {
       this.activeButton = '';
       this.checkBoxDisabled = true;
@@ -61,7 +59,6 @@ export class ConverterComponent {
       this.posterizedCheckboxRef.nativeElement.checked = false;
     }
     }
-    console.log(this.activeButton, "-> setActive");
   }
 
   displayUpload() {
@@ -91,23 +88,20 @@ export class ConverterComponent {
   }
 
   checkTraceMode() {
-    console.log(this.activeButton, "is the active button")
     if (this.activeButton == 'colorBtn') {
       this.traceColor();
       return;
     }
     else if (this.activeButton == 'bwBtn') {
       if(this.checkBoxChecked) {
-        console.log("Posterizing image...")
         this.posterize();
         return;
       }
-      console.log("Tracing in black and white...")
       this.traceBW();
       return;
     }
     else {
-      console.log("No mode found!");
+      console.error("No mode found!");
       return;
     }
   }
@@ -126,7 +120,6 @@ export class ConverterComponent {
   traceBW() {
     const canvas = this.canvasRef.nativeElement;
     canvas.toBlob(blob => {
-      console.log(URL.createObjectURL(blob!));
       if (!blob) return;
       potrace.trace(URL.createObjectURL(blob), { }, (err, svg) => {
         if (err) {
@@ -144,7 +137,6 @@ export class ConverterComponent {
   posterize() {
     const canvas = this.canvasRef.nativeElement;
     canvas.toBlob(blob => {
-      console.log(URL.createObjectURL(blob!));
       if (!blob) return;
       potrace.posterize(URL.createObjectURL(blob), { }, (err, svg) => {
         if (err) {
