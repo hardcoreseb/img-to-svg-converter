@@ -1,59 +1,77 @@
-# ImgToSvgConverter
+# 🖼️ SVG Image Tracer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+Convert raster images (JPG, PNG, etc.) into scalable SVG vectors using different tracing algorithms — all in your browser.
 
-## Development server
+![Preview](./src/assets/preview_svg_converter.png) <!-- Optional: replace with actual screenshot path -->
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- 📤 Upload any image format (JPEG, PNG, WebP, etc.)
+- 🎨 Choose between different SVG tracing methods:
+  - **Color Trace (ImageTracer.js)** – Keeps original colors, fast but less precise.
+  - **B/W Trace (Potrace)** – Monochrome, higher accuracy.
+  - **Posterized Trace (Enhanced Potrace)** – Monochrome with grayscale-like results. Most precise.
+- 🔁 Live SVG preview before download
+- 💾 Download your vector as an `.svg` file
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧪 Conversion Styles
 
-```bash
-ng generate component component-name
-```
+| Mode             | Color Support | Precision | Best Use Case                     |
+|------------------|---------------|-----------|-----------------------------------|
+| **Color Trace**  | ✅             | ⭐⭐        | Posters, logos with many colors   |
+| **B/W Trace**    | ❌             | ⭐⭐⭐      | Stamps, logos with sharp contrast |
+| **Posterized**   | ❌ (Mono + Shades) | ⭐⭐⭐⭐ | Hand-drawn sketches, high detail |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📦 Getting Started
 
-## Building
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/hardcoreseb/svg-image-tracer.git
 
-To build the project run:
+2. **Install dependencies**
+    ```bash
+    npm install
 
-```bash
-ng build
-```
+3. **Run the app**
+    ```bash
+    ng serve
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+4. **Open `http://localhost:4200` in your browser**
 
-## Running unit tests
+## 📂 How to Use
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Upload an image
 
-```bash
-ng test
-```
+2. Select a tracing method
 
-## Running end-to-end tests
+3. Click "Convert"
 
-For end-to-end (e2e) testing, run:
+4. Preview the SVG result
 
-```bash
-ng e2e
-```
+5. Click "Download" to save the SVG
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 💡 Tech Stack
 
-## Additional Resources
+- Angular
+- [ImageTracer.js](https://github.com/jankovicsandras/imagetracerjs)
+- [Potrace](https://www.npmjs.com/package/potrace)
+- SCSS
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📸 Screenshots
+
+| Original Image | ImageTracer SVG | Potrace SVG | Posterized Potrace SVG |
+|----------------|------------------|-------------|--------------------------|
+| ![Original](./src/assets/old_rich_pepe.jpg) | ![ImageTracer](./src/assets/old_rich_pepe.svg) | ![Potrace](./src/assets/old_rich_pepe_bw.svg) | ![Posterized](./src/assets/old_rich_pepe_posterized.svg) |
+
+> _Above: Comparison of the same image using the different conversion methods._
+
+
+
+## 📄 License
+MIT — feel free to use and modify it!
