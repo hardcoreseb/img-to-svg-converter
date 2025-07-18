@@ -67,7 +67,7 @@ Convert raster images (JPG, PNG, etc.) into scalable SVG vectors using different
 
 | Original Image | ImageTracer SVG | Potrace SVG | Posterized Potrace SVG |
 |----------------|------------------|-------------|--------------------------|
-| ![Original](./src/assets/old_rich_pepe.jpg) | ![ImageTracer](./src/assets/old_rich_pepe.svg) <img src="./src/assets/old_rich_pepe.svg"> | ![Potrace](./src/assets/old_rich_pepe_bw.svg) | ![Posterized](./src/assets/old_rich_pepe_posterized.svg) |
+| ![Original](./src/assets/old_rich_pepe.jpg) | ![ImageTracer](https://cdn.rawgit.com/hardcoreseb/img-to-svg-converter/main/src/assets/old_rich_pepe.svg) | ![Potrace](./src/assets/old_rich_pepe_bw.svg) | ![Posterized](./src/assets/old_rich_pepe_posterized.svg) |
 
 > _Above: Comparison of the same image using the different conversion methods._
 
