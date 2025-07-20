@@ -2,6 +2,8 @@
 
 Convert raster images (JPG, PNG, etc.) into scalable SVG vectors using different tracing algorithms — all in your browser.
 
+🔴 [Live Demo](https://hardcoreseb.github.io/img-to-svg-converter/) 🔴
+
 ![Preview](./src/assets/preview_svg_converter.png) <!-- Optional: replace with actual screenshot path -->
 
 ---
